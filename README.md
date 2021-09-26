@@ -38,3 +38,23 @@ airflow scheduler
 http://localhost:8083
 </code>
 </pre>
+# 일래스틱서치의 설치와 설정
+- curl을 이용해서 일래스틱 서치 압축 파일을 내려받는다.
+<pre>
+<code>
+curl https://artifacts.elastic.co/downloads/elasticsearch/\elasticsearch-7.6.0-darwin-x86_64.tar.gz --output elasticsearch.tar.gz
+</code>
+</pre>
+- 압축 파일을 해제한다.
+<pre>
+<code>
+tar xvzf elasticsearch.tar.gz
+</code>
+</pre>
+- 새로 만들어진 디렉터리의 config/elasticsearch.yml을 열고 노트와 클러스터 이름을 설정한다.
+<pre>
+<code>
+cluster.name: custum
+node.name: custum
+</code>
+</pre>
