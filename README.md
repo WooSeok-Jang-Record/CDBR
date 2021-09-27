@@ -39,6 +39,7 @@ http://localhost:8083
 </code>
 </pre>
 # 일래스틱서치의 설치와 설정
+- 참고 : https://velog.io/@qnfmtm666/elasticsearch-Elasticsearch-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-Ubuntu-20.04
 - 다음과 같은 사항이 필요합니다. (권장)
   - 듀얼코어 이상의 CPU와 4gb 이상의 램 
  
@@ -111,5 +112,7 @@ network.host: localhost
  $ sudo systemctl enable elasticsearch
  </pre>
  </code>
+# Step 4 - 확인
+- 별도로 포트 설정을 안했다면 http://localhost:9200 으로 접속하면 json 형식으로 값이 뜬다.
 
 
