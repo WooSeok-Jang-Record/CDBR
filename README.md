@@ -39,22 +39,77 @@ http://localhost:8083
 </code>
 </pre>
 # 일래스틱서치의 설치와 설정
-- curl을 이용해서 일래스틱 서치 압축 파일을 내려받는다.
+- 다음과 같은 사항이 필요합니다. (권장)
+  - 듀얼코어 이상의 CPU와 4gb 이상의 램 
+ 
+# Step 1 -Install 
+- Ubuntu 에서는 ElasticSearch 컴포넌트가 기본적으로 이용이 불가능합니다. 하지만 apt 명령으로 설치 후 Elastic 의 패키지를 설치한다면 이용 가능합니다.
+- ElasticSearch는 너를 사랑해서 Elastic 인증키로 서명이 되어 있습니다.(보안을 위해서라는 뜻) 키를 통해 인증받은 패키지들은 모두 사용가능합니다.
+- 설치를 위해 다음을 실행하여 Elastic Public GPG 키를 추가.
 <pre>
 <code>
-curl https://artifacts.elastic.co/downloads/elasticsearch/\elasticsearch-7.6.0-darwin-x86_64.tar.gz --output elasticsearch.tar.gz
-</code>
+$ curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 </pre>
-- 압축 파일을 해제한다.
+</code>
+- sources.list.d 폴더에 Elastic 소스리스트를 추가 APT 가 새로운 소스를 찾아야한다.
 <pre>
 <code>
-tar xvzf elasticsearch.tar.gz
-</code>
+$ echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 </pre>
-- 새로 만들어진 디렉터리의 config/elasticsearch.yml을 열고 노트와 클러스터 이름을 설정한다.
+</code>
+- package list 업데이트
 <pre>
 <code>
-cluster.name: custum
-node.name: custum
+$ sudo apt update
 </code>
 </pre>
+- 설치
+<pre>
+<code>
+$ sudo apt install elasticsearch
+</code>
+</pre>
+
+# Step 2 - 설정
+- 로컬 머신에서 돌리기 위해서 약간의 수정이 필요
+- ElasticSearch 는 elasticsearch.yml 에서 설정을 관리하고 있습니다.
+<pre>
+<code>
+$ sudo gedit /etc/elasticsearch/elasticsearch.yml
+</code>
+</pre>
+
+<pre>
+<code>
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: localhost
+. . .
+</code>
+</pre>
+
+# Step 3 - 실행
+- systemctl 명령으로 실행
+- 초기 수행에 시간이 걸립니다.
+<pre>
+<code>
+ $ sudo systemctl start elasticsearch
+ </pre>
+ </code>
+ - 구동 확인
+ <pre>
+ <code>
+ $ service elasticsearch status
+ </pre>
+ </code>
+ - 위의 명령을 입력후, active running 단어가 보이면 정상 실행중이라는 뜻. 램을 많이 잡아먹는다.
+ - 이제 컴퓨터가 켜질 때마다 자동으로 실행하게 해준다.
+ <pre>
+ <code>
+ $ sudo systemctl enable elasticsearch
+ </pre>
+ </code>
+
+
