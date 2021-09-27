@@ -81,6 +81,12 @@ sudo bin/nifi.sh start
 </pre>
 
 # 아파치 나이파이 실행 확인
-- http://localhost:8080/nifi 실행 (port 번호는 nifi-env.sh 파일을 편집하여 설정가능)
+- http://localhost:8080/nifi 실행 (port 번호는 nifi-env.sh 파일을 편집하여 설정가능
+- 만일 방화벽이 작동 중이라면 다음과 같이 해당 포트를 열어주어야 할 수도 있다.
+<pre>
+<code>
+sudo ufw allow 8080/tcp
+</code>
+</pre>
 
 
