@@ -76,8 +76,27 @@ mosquitto
 </code>
 </pre>
 2. ESP32 Board Connect ( Develope PC )
-3. 
+
 ![image](https://user-images.githubusercontent.com/91245647/137443774-dcb7b5c7-4b41-4020-b7db-760e839e0540.png)
 
-3. 
+3. ESP32 Board Connect 확인 ( Ubuntu PC)
+
+![image](https://user-images.githubusercontent.com/91245647/137444304-22eeb302-e6c6-4cb4-a72c-6daada6c2fd9.png)
+
+4. Mosquitto Client 개설
+ESP32 Dev 보드에서 Mosquitto Broker에 토픽을 Publish 하고 있다.
+따라서, Ubuntu PC 에서 Client를 열어 토픽을 수신한다.
+
+<pre>
+<code>
+mosquitto_sub -h localhost -t esp_to_bro
+</code>
+</pre>
+
+-h 는 Broker의 IP를 기입. 
+-t 는 ESP32 소스코드에서 지정한 토픽명을 기입.
+
+![image](https://user-images.githubusercontent.com/91245647/137444696-b53079ff-f0ed-4e80-9ad8-1d1f18fb9d8a.png)
+
+
 
