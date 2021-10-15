@@ -22,6 +22,12 @@ Ubuntu 20.04 Mosquitto Install
   sudo apt-get install mosquitto
   </code>
   </pre>
+  - Mosquitto-clients 설치
+  <pre>
+  <code>
+  sudo apt-get install mosquitto-clients
+  </code>
+  </pre>
   - 설치 확인
   <pre>
   <code>
@@ -31,3 +37,12 @@ Ubuntu 20.04 Mosquitto Install
   ![image](https://user-images.githubusercontent.com/91245647/137439452-edbcdf11-dd5f-4c6b-a2bd-ed9d27af3063.png)
 
   port 번호를 확인 가능하며 Initial Port Number는 1883으로 설정.
+  
+- Stopping and Starting
+<pre>
+<code>
+sudo /etc/init.d/mosquitto stop
+sudo service mosquitto start
+</code>
+</pre>
+
