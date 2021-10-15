@@ -12,6 +12,7 @@
 #include <WiFi.h>
 #include <Wire.h>
 #include <PubSubClient.h>
+#include <ArduinoJson.h>
 #include <sstream>
 #include "AzureIotHub.h"
 #include "Esp32MQTTClient.h"
@@ -35,8 +36,11 @@ const int mqttPort = 1883;
 const char* mqttUser = "user";
 const char* mqttPassword = "1234";
 const char* nodeName = "ESP32_Temp_01";
-const char* topic_pub = "messagebox";   // 메세지를 전송할 토픽의 이름
-const char* topic_sub = "messagebox2";  // 센서장치로 들어오는 메시지 수신을 위해 새로 만든 토픽.
+const char* topic_pub = "esp_to_bro";   // 메세지를 전송할 토픽의 이름
+const char* topic_sub = "bro_to_esp";  // 센서장치로 들어오는 메시지 수신을 위해 새로 만든 토픽.
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+char sensor_data_msg[100];
 
 /*String containing Hostname, Device Id & Device Key in the format:                         */
 /*  "HostName=<host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"                */
@@ -56,10 +60,16 @@ const long gmtOffset_sec = 32400;
 const int daylightOffset_sec = 0;
 struct tm timeinfo;
 
-// MQTT Init Validation
-WiFiClient espClient;
-PubSubClient mqttClient(espClient);
+// HTU_Sensor Init Validation
+float temperature = 0;
+float humidity = 0;
+float datacount = 1;
 
+
+// JSON Data Init Validation
+//StaticJsonDocument<200> doc;
+//doc["Device"] = "ESP32_01";
+//doc["time"] = 1351824120;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +169,17 @@ void mqttcallback(char* topic, byte* payload, unsigned int length) {
   Serial.println("-----------------------");
 }
 
+float Sensor_Data_To_Json(float count, float temp, float humi){
+    StaticJsonDocument<200> Sensor_Data;
+      Sensor_Data["Device"] = "ESP32_01";
+      Sensor_Data["Data_Count"] = count;
+      Sensor_Data["Temp"] = temp;
+      Sensor_Data["Humi"] = humi;
+    serializeJson(Sensor_Data,Serial);
+    Serial.println();
+    serializeJson(Sensor_Data,sensor_data_msg);
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,6 +243,7 @@ void setup()
   // init and get the time
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
     printLocalTime();
+
 }
 
 
@@ -237,21 +259,27 @@ void loop()
     {
       // Send teperature data
       char messagePayload[MESSAGE_MAX_LEN];
-      float temperature = htu.readTemperature();
-      float humidity = htu.readHumidity();
+      temperature = htu.readTemperature();
+      humidity = htu.readHumidity();
       snprintf(messagePayload, MESSAGE_MAX_LEN, messageData, DEVICE_ID, messageCount++, temperature, humidity); // Message Sending Key Sentence
-      Serial.println(messagePayload);
+      //Serial.println(messagePayload);
       EVENT_INSTANCE* message = Esp32MQTTClient_Event_Generate(messagePayload, MESSAGE);
       Esp32MQTTClient_Event_AddProp(message, "temperatureAlert", "true");
       Esp32MQTTClient_SendEventInstance(message);
-      Serial.print("Time_Test_Print:");
-      Serial.println(&timeinfo, "%A");
       send_interval_ms = millis();
+      
+      Sensor_Data_To_Json(datacount,temperature,humidity);
+      datacount++;
+      
+      mqttClient.publish(topic_pub, sensor_data_msg);
+     
     }
     else
     {
       Esp32MQTTClient_Check();
     }
   }
+
+
   delay(10);
 }
