@@ -46,3 +46,38 @@ sudo service mosquitto start
 </code>
 </pre>
 
+- mosquitto.conf 파일 수정
+<pre>
+<code>
+cd /etc/mosquitto
+vi mosquitto.conf
+</code>
+</pre>
+편집 화면 하단에 다음 내용 추가
+<pre>
+<code>
+# Password File Location Setting
+password_file /etc/mosquitto/passwd
+
+# Blocking Anonymouse Access
+bind_address 0.0.0.0
+allow_anonymouse true
+</code>
+</pre>
+
+Mosquitto Publisher & Broker & Subscriber
+=
+![image](https://user-images.githubusercontent.com/91245647/137443455-be26a04d-b2f8-4310-9fb4-14657a27163d.png)
+
+1. Mosquitto Broker Start ( Ubuntu PC)
+<pre>
+<code>
+mosquitto
+</code>
+</pre>
+2. ESP32 Board Connect ( Develope PC )
+3. 
+![image](https://user-images.githubusercontent.com/91245647/137443774-dcb7b5c7-4b41-4020-b7db-760e839e0540.png)
+
+3. 
+
