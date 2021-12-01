@@ -291,3 +291,17 @@ void loop()
 }
 </code>
 </pre>
+
+## 디버그 내용 정리
+### MQTT Connect Fail
+- 두가지 가능성을 의심할 수 있다.
+  1. mosquitto.conf 파일 초기화 설정 문제
+  해당 경로에 들어간다.
+  <pre><code> cd /etc/mosquitto/</code></pre>
+  2. 편집기를 통해 아래의 내용 추가
+  <pre><code>sudo vi mosquitto.conf</code></pre>
+  </br>
+  <pre><code>listener 1883 0.0.0.0
+   allow_anonymous true</code></pre>
+   
+  
