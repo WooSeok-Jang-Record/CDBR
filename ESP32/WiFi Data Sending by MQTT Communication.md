@@ -1,6 +1,7 @@
 ESP32 dev 보드의 MQTT 통신 
 ===
 - Header File 추가 (코드에 작성된 해당 헤더파일 라이브러리를 추가해야 함.)
+- 참고 [https://velog.io/@adguy/%EC%9A%B0%EB%B6%84%ED%88%ACmqtt-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%9B%ED%8C%85-mqttBroker%EC%9D%98-%EB%AA%A8%EB%93%A0%EA%B2%83]
 <pre>
 <code>
 // Yonsei-University-DigitalBioMarker-Research-Lab
