@@ -294,7 +294,7 @@ void loop()
 
 ## 디버그 내용 정리
 ### MQTT Connect Fail
-- 두가지 가능성을 의심할 수 있다.
+- 아래의 과정을 통해 문제 해결.
   1. mosquitto.conf 파일 초기화 설정 문제
   해당 경로에 들어간다.
   <pre><code> cd /etc/mosquitto/</code></pre>
@@ -303,5 +303,12 @@ void loop()
   </br>
   <pre><code>listener 1883 0.0.0.0
    allow_anonymous true</code></pre>
+  3. 수정한 conf 파일 적용
+  <pre><code>mosquitto -c /etc/mosquitto/mosquitto.conf</code></pre>
+  4. 만약 unable to open log file 에러가 발생한다면 아래의 위치로 이동
+  <pre><code>cd /var/log/mosquitto</code></pre>
+  5. log 파일 권한 변경
+  <pre><code>sudo chmod a=rw mosquitto.log</code></pre>
+  참조 : [https://recipes4dev.tistory.com/175]
    
   
