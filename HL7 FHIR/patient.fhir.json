@@ -1,0 +1,36 @@
+{
+    "resourceType": "Patient",
+    "id": "f001",
+    "name": [
+        {
+            "use": "official",
+            "given": ["Jang"],
+            "family": "Wooseok"
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1992-11-16",
+    "telecom": [
+        {
+            "value": "0337410238",
+            "use": "home",
+            "system": "phone"
+        },
+        {
+            "system": "email",
+            "value": "uold1000@gmail.com"
+        }
+    ],
+    "address": [
+        {
+            "line": [
+            "20,Ilsan-ro"
+            ],
+            "city": "Wonju-si",
+            "state": "Gangwon-do",
+            "postalCode": "26426",
+            "period": "2000-01-02"
+        }
+    ]
+    
+}
