@@ -1,12 +1,22 @@
 {
     "resourceType": "Patient",
-    "id": "f001",
     "name": [
         {
             "use": "official",
             "given": ["Jang"],
             "family": "Wooseok"
         }
+    ],
+    "identifier": [
+        {
+        "period":
+        {
+            "start":"2021-02-15"
+        },
+        "assigner": {
+            "display": "Yonseri CDBR"
+        }
+    }       
     ],
     "gender": "male",
     "birthDate": "1992-11-16",
