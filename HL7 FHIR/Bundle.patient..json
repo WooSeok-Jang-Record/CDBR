@@ -1,0 +1,60 @@
+{
+	"resourceType": "Bundle",
+	"id": "2818392",
+	"meta": {
+		"versionId": "1",
+		"lastUpdated": "2022-02-22T01:59:00.799+00:00",
+		"source": "#wZQ0doON2m7L4cXL"
+	},
+	"type": "collection",
+	"entry": [
+		{
+			"resource": {
+				"resourceType": "Patient",
+				"id": "cf-1645419068169",
+				"text": {
+					"status": "generated",
+					"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CDBR-002<a name=\"mm\"/></div>"
+				},
+				"name": [
+					{
+						"use": "usual",
+						"family": "장",
+						"given": [
+							"우석"
+						]
+					}
+				],
+				"telecom": [
+					{
+						"system": "phone",
+						"value": "010-2336-9156",
+						"use": "mobile"
+					},
+					{
+						"system": "email",
+						"value": "wooseok.jang@yonsei.ac.kr",
+						"use": "home"
+					}
+				],
+				"gender": "male",
+				"birthDate": "1992-11-16",
+				"deceasedBoolean": true,
+				"address": [
+					{
+						"use": "home",
+						"type": "postal",
+						"line": [
+							"진리관 504호",
+							"일산로 20"
+						],
+						"city": "원주시",
+						"district": "강원도",
+						"postalCode": "26426",
+						"country": "대한민국"
+					}
+				]
+			}
+		}
+	]
+}
